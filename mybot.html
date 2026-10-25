@@ -11,194 +11,256 @@
       --bg: #faf8fc;
       --card: #ffffff;
       --accent: #742774;
+      --accent-dark: #3a0f3a;
       --accent-soft: #f3e8f3;
       --line: #e6e0ec;
+      --apps: #742774;
+      --automate: #0066ff;
+      --bi: #c69a00;
+      --copilot: #0f7b6c;
+      --pages: #b4386b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--ink);
       line-height: 1.6;
     }
+
+    /* Top navigation */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .inner {
+      max-width: 1000px; margin: 0 auto; padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    nav .brand { font-weight: 700; color: var(--accent); text-decoration: none; }
+    nav .links { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav .links a { color: var(--muted); text-decoration: none; font-size: 0.92rem; }
+    nav .links a:hover { color: var(--accent); }
+
+    /* Hero */
     header {
-      background: linear-gradient(135deg, #742774 0%, #3a0f3a 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
       color: #fff;
-      padding: 64px 20px 56px;
+      padding: 72px 20px 64px;
       text-align: center;
     }
-    header h1 { font-size: 2.6rem; letter-spacing: -0.5px; }
-    header p { max-width: 620px; margin: 12px auto 0; opacity: 0.9; font-size: 1.1rem; }
-    .cta {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 10px 22px;
-      border-radius: 999px;
-      background: #fff;
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-      border: 0;
-      cursor: pointer;
-      font: inherit;
+    header .tag {
+      display: inline-block; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;
+      background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 999px; margin-bottom: 14px;
     }
-    .cta:hover { opacity: 0.92; }
-    .cta:focus-visible { outline: 3px solid #cba6e0; outline-offset: 3px; }
-    .cta-secondary { background: var(--accent); color: #fff; margin-bottom: 20px; }
-    main { max-width: 960px; margin: 0 auto; padding: 48px 20px 80px; }
-    section { margin-bottom: 48px; }
-    h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--accent); }
-    p.lead { color: var(--muted); margin-bottom: 18px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
+    header h1 { font-size: 2.8rem; letter-spacing: -0.5px; }
+    header p { max-width: 640px; margin: 12px auto 0; opacity: 0.92; font-size: 1.12rem; }
+    .stats { display: flex; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
+    .stats div { text-align: center; }
+    .stats strong { display: block; font-size: 1.6rem; }
+    .stats span { font-size: 0.85rem; opacity: 0.85; }
+
+    main { max-width: 1000px; margin: 0 auto; padding: 56px 20px 80px; }
+    section { margin-bottom: 64px; scroll-margin-top: 70px; }
+    h2 { font-size: 1.6rem; margin-bottom: 10px; color: var(--accent); }
+    p.lead { color: var(--muted); margin-bottom: 22px; max-width: 720px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 18px;
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
     }
     .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
     .card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* Platform map */
+    .map { display: grid; gap: 12px; }
+    .map .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .tool {
+      background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--c);
+      border-radius: 10px; padding: 14px; text-align: center;
+    }
+    .tool strong { display: block; color: var(--c); }
+    .tool span { font-size: 0.85rem; color: var(--muted); }
+    .layer {
+      border-radius: 10px; padding: 14px; text-align: center; font-size: 0.95rem;
+    }
+    .layer.connectors { background: var(--accent-soft); color: var(--accent); }
+    .layer.dataverse { background: var(--accent-dark); color: #fff; }
+    .layer small { display: block; opacity: 0.85; font-size: 0.82rem; }
+
+    /* Tool picker */
+    .picker { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .options { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .options button {
+      font: inherit; font-size: 0.92rem; cursor: pointer;
+      background: var(--bg); border: 1px solid var(--line); color: var(--ink);
+      padding: 9px 14px; border-radius: 999px; transition: all 0.15s;
+    }
+    .options button:hover { border-color: var(--accent); }
+    .options button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .result {
+      border-left: 4px solid var(--accent); background: var(--accent-soft);
+      padding: 16px 18px; border-radius: 8px; min-height: 70px;
+    }
+    .result h3 { color: var(--accent); margin-bottom: 4px; }
+    .result p { color: var(--ink); font-size: 0.97rem; }
+    .result .hint { color: var(--muted); font-size: 0.88rem; margin-top: 8px; }
+
+    /* Questions */
     ul.questions { list-style: none; display: grid; gap: 10px; }
-    ul.questions li {
-      background: var(--accent-soft);
-      border-left: 4px solid var(--accent);
-      padding: 12px 16px;
-      border-radius: 6px;
+    ul.questions button {
+      width: 100%; text-align: left; font: inherit; cursor: pointer;
+      background: var(--accent-soft); border: none; border-left: 4px solid var(--accent);
+      padding: 13px 16px; border-radius: 6px; color: var(--ink);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      transition: transform 0.12s;
     }
+    ul.questions button:hover { transform: translateX(4px); }
+    ul.questions button span.go { color: var(--accent); font-weight: 600; font-size: 0.85rem; white-space: nowrap; }
+
+    /* Steps */
+    .steps { counter-reset: step; }
+    .steps .card { position: relative; padding-top: 42px; }
+    .steps .card::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; top: 14px; left: 18px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--accent); color: #fff; font-size: 0.85rem; font-weight: 700;
+      display: grid; place-items: center;
+    }
+
     .note {
-      background: var(--card);
-      border: 1px dashed var(--line);
-      border-radius: 12px;
-      padding: 18px;
-      color: var(--muted);
+      background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; color: var(--muted);
     }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 8px; font-size: 0.9rem;
+      opacity: 0; transition: all 0.25s; z-index: 20;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     footer {
-      text-align: center;
-      padding: 24px 20px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--line);
+      text-align: center; padding: 28px 20px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line);
     }
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 2.1rem; }
+      nav .links { display: none; }
     }
   </style>
 
   <!-- Botpress Webchat: PowerPal -->
   <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
-  <script>
-    // The bot configuration below loads separately. Wait until Botpress is initialized
-    // before opening chat in case someone clicks immediately after page load.
-    let powerPalChatReady = false;
-    let openPowerPalWhenReady = false;
-
-    window.botpress.on('webchat:initialized', () => {
-      powerPalChatReady = true;
-      if (openPowerPalWhenReady) {
-        window.botpress.open();
-        openPowerPalWhenReady = false;
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-open-chat]').forEach(button => {
-        button.addEventListener('click', () => {
-          if (powerPalChatReady) {
-            window.botpress.open();
-          } else {
-            openPowerPalWhenReady = true;
-          }
-        });
-      });
-    });
-  </script>
   <script src="https://files.bpcontent.cloud/2026/10/25/18/20261025182519-5RVA5R0X.js" defer></script>
 </head>
 <body>
 
-  <header>
+  <nav>
+    <div class="inner">
+      <a class="brand" href="#top">PowerPal</a>
+      <div class="links">
+        <a href="#map">Platform map</a>
+        <a href="#picker">Which tool?</a>
+        <a href="#ask">Ask PowerPal</a>
+        <a href="#how">How it works</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="tag">AI Help Bot &middot; Built with Botpress</div>
     <h1>PowerPal</h1>
-    <p>Your beginner's guide to Microsoft Power Platform. Ask PowerPal anything about Power Apps, Power Automate, Dataverse, Power BI, and where to start learning.</p>
-    <button type="button" class="cta" data-open-chat>Try the bot</button>
+    <p>Your beginner's guide to Microsoft Power Platform. Not sure if you need Power Apps, Power Automate, or Dataverse? Ask PowerPal and get a short, plain answer.</p>
+    <div class="stats">
+      <div><strong>5</strong><span>Power Platform tools covered</span></div>
+      <div><strong>20+</strong><span>beginner topics in the knowledge base</span></div>
+      <div><strong>24/7</strong><span>answers in the chat bubble</span></div>
+    </div>
   </header>
 
   <main>
-    <section>
+    <section id="why">
       <h2>Why I built PowerPal</h2>
-      <p class="lead">When people first hear about Power Platform, the names blur together. Is a flow part of Power Apps? What is Dataverse, and do I need it? PowerPal gives short, plain answers to these questions so beginners can figure out which tool fits their problem and how to get started.</p>
+      <p class="lead">I spent about four years working with Dynamics 365 and Power Platform, and the same beginner questions kept coming up. Is a flow part of Power Apps? What is Dataverse, and do I actually need it? Microsoft's documentation is thorough, but it's a lot to dig through when you just want to know where to start. PowerPal gives short, plain answers so beginners can figure out which tool fits their problem.</p>
     </section>
 
-    <section>
-      <h2>What PowerPal knows</h2>
-      <p class="lead">PowerPal answers from a knowledge base I wrote that covers the core tools and common beginner questions.</p>
-      <div class="grid">
-        <div class="card">
-          <h3>Power Apps</h3>
-          <p>Canvas apps vs. model-driven apps, Power Fx, and when to use each.</p>
+    <section id="map">
+      <h2>The Power Platform at a glance</h2>
+      <p class="lead">Five tools sit on top of a shared data layer. PowerPal can explain each one and how they connect.</p>
+      <div class="map">
+        <div class="tools">
+          <div class="tool" style="--c: var(--apps)"><strong>Power Apps</strong><span>Build business apps</span></div>
+          <div class="tool" style="--c: var(--automate)"><strong>Power Automate</strong><span>Automate tasks with flows</span></div>
+          <div class="tool" style="--c: var(--bi)"><strong>Power BI</strong><span>Reports and dashboards</span></div>
+          <div class="tool" style="--c: var(--copilot)"><strong>Copilot Studio</strong><span>Build AI agents</span></div>
+          <div class="tool" style="--c: var(--pages)"><strong>Power Pages</strong><span>External websites</span></div>
         </div>
-        <div class="card">
-          <h3>Power Automate</h3>
-          <p>Automated, instant, and scheduled cloud flows, plus desktop flows (RPA).</p>
+        <div class="layer connectors"><strong>Connectors</strong><small>Outlook, SharePoint, Excel, Salesforce, SQL Server, and hundreds more</small></div>
+        <div class="layer dataverse"><strong>Dataverse</strong><small>Shared database with tables, relationships, business rules, and security</small></div>
+      </div>
+    </section>
+
+    <section id="picker">
+      <h2>Which tool do I need?</h2>
+      <p class="lead">Pick a goal and see which Power Platform tool fits. Then ask PowerPal to go deeper.</p>
+      <div class="picker">
+        <div class="options" id="options">
+          <button data-key="form">Replace a paper form with an app</button>
+          <button data-key="email">Send an email when something changes</button>
+          <button data-key="report">Track sales numbers in a dashboard</button>
+          <button data-key="data">Store data with relationships and security</button>
+          <button data-key="chat">Build a chatbot for employees</button>
+          <button data-key="portal">Let customers submit requests online</button>
         </div>
-        <div class="card">
-          <h3>Dataverse</h3>
-          <p>Tables, relationships, business rules, and role-based security.</p>
-        </div>
-        <div class="card">
-          <h3>Power BI &amp; Copilot Studio</h3>
-          <p>Reports and dashboards, and Microsoft's own tool for building AI agents.</p>
-        </div>
-        <div class="card">
-          <h3>Environments &amp; Solutions</h3>
-          <p>How apps move from development to production, managed vs. unmanaged.</p>
-        </div>
-        <div class="card">
-          <h3>Learning Path</h3>
-          <p>Free developer plan, Microsoft Learn, and certifications like PL-900.</p>
+        <div class="result" id="result">
+          <p class="hint">Choose one of the goals above.</p>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2>How PowerPal works</h2>
-      <p class="lead">PowerPal is a small Botpress bot that I wired together in three pieces.</p>
+    <section id="knows">
+      <h2>What PowerPal knows</h2>
+      <p class="lead">PowerPal answers from a knowledge base I wrote that covers the core tools and the questions beginners ask most.</p>
       <div class="grid">
-        <div class="card">
-          <h3>Built in Botpress</h3>
-          <p>I built PowerPal in Botpress Viber by describing what the bot should do, then refining its instructions and testing it in Preview.</p>
-        </div>
-        <div class="card">
-          <h3>Answers from a knowledge base</h3>
-          <p>I uploaded my Power Platform notes as a knowledge base, and PowerPal answers from that content.</p>
-        </div>
-        <div class="card">
-          <h3>Embedded with Botpress Webchat</h3>
-          <p>The Botpress webchat script puts the chat bubble on this page, so you can talk to the bot right here.</p>
-        </div>
+        <div class="card"><h3>Power Apps</h3><p>Canvas apps vs. model-driven apps, Power Fx, and when to use each.</p></div>
+        <div class="card"><h3>Power Automate</h3><p>Automated, instant, and scheduled cloud flows, plus desktop flows (RPA).</p></div>
+        <div class="card"><h3>Dataverse</h3><p>Tables, relationships, business rules, and role-based security.</p></div>
+        <div class="card"><h3>Power BI &amp; Copilot Studio</h3><p>Reports and dashboards, and Microsoft's own tool for building AI agents.</p></div>
+        <div class="card"><h3>Environments &amp; Solutions</h3><p>How apps move from development to production, managed vs. unmanaged.</p></div>
+        <div class="card"><h3>Learning Path</h3><p>Free developer plan, Microsoft Learn, and certifications like PL-900.</p></div>
       </div>
     </section>
 
     <section id="ask">
-      <h2>Questions to try</h2>
-      <p class="lead">Click the button below or use the chat bubble in the bottom-right corner, then ask one of these.</p>
-      <button type="button" class="cta cta-secondary" data-open-chat>Open PowerPal chat</button>
+      <h2>Ask PowerPal</h2>
+      <p class="lead">Click a question to send it to PowerPal, or open the chat bubble in the bottom-right corner and type your own.</p>
       <ul class="questions">
-        <li>What is the difference between a canvas app and a model-driven app?</li>
-        <li>What types of cloud flows can I build in Power Automate?</li>
-        <li>What is Dataverse and why would I use it?</li>
-        <li>How is Dynamics 365 related to Power Platform?</li>
-        <li>I'm a beginner. Where should I start?</li>
+        <li><button data-q="What is the difference between a canvas app and a model-driven app?">What is the difference between a canvas app and a model-driven app? <span class="go">Ask &rarr;</span></button></li>
+        <li><button data-q="What types of cloud flows can I build in Power Automate?">What types of cloud flows can I build in Power Automate? <span class="go">Ask &rarr;</span></button></li>
+        <li><button data-q="What is Dataverse and why would I use it?">What is Dataverse and why would I use it? <span class="go">Ask &rarr;</span></button></li>
+        <li><button data-q="How is Dynamics 365 related to Power Platform?">How is Dynamics 365 related to Power Platform? <span class="go">Ask &rarr;</span></button></li>
+        <li><button data-q="I'm a beginner. Where should I start?">I'm a beginner. Where should I start? <span class="go">Ask &rarr;</span></button></li>
       </ul>
+    </section>
+
+    <section id="how">
+      <h2>How PowerPal works</h2>
+      <p class="lead">PowerPal is a small Botpress bot that I put together in three steps.</p>
+      <div class="grid steps">
+        <div class="card"><h3>Built in Botpress Viber</h3><p>I built PowerPal in Botpress Viber by describing what the bot should do, then refining its instructions and testing it in Preview.</p></div>
+        <div class="card"><h3>Answers from a knowledge base</h3><p>I uploaded my Power Platform notes as a knowledge base, and PowerPal answers from that content instead of guessing.</p></div>
+        <div class="card"><h3>Embedded with Botpress Webchat</h3><p>The Botpress webchat script puts the chat bubble on this page, so you can talk to the bot right here.</p></div>
+      </div>
     </section>
 
     <section>
       <h2>Good to know</h2>
       <div class="note">
-        PowerPal is a learning aid built with Botpress for a class project. It sticks to beginner topics and does not cover licensing prices, which change often. For official and up-to-date details, check Microsoft Learn.
+        PowerPal is a learning aid built for a class project. It sticks to beginner topics and does not cover licensing prices, which change often. For official and up-to-date details, check Microsoft Learn.
       </div>
     </section>
   </main>
@@ -207,5 +269,67 @@
     Built by Arun Kumar Sakkeri &middot; ISM 6225 Assignment 2 &middot; Powered by Botpress
   </footer>
 
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Tool picker answers, based on the PowerPal knowledge base
+    const picks = {
+      form:   { tool: "Power Apps (canvas app)", why: "A canvas app lets you design the screens yourself, so it's a good fit for a focused task like an inspection checklist or expense form.", ask: "When should I use a canvas app?" },
+      email:  { tool: "Power Automate (automated cloud flow)", why: "An automated flow starts when something happens, like a new row or a form submission, and can send an email or Teams message.", ask: "What is an automated cloud flow?" },
+      report: { tool: "Power BI", why: "Power BI connects to your data, cleans it with Power Query, and turns it into interactive reports and dashboards you can share.", ask: "What is Power BI used for?" },
+      data:   { tool: "Dataverse", why: "Dataverse stores data in tables with relationships, business rules, and role-based security, so you control who sees what.", ask: "What is Dataverse and why would I use it?" },
+      chat:   { tool: "Copilot Studio", why: "Copilot Studio is Microsoft's tool for building AI agents that answer from knowledge sources and can be published to Teams.", ask: "What is Copilot Studio?" },
+      portal: { tool: "Power Pages", why: "Power Pages builds secure external websites that read and write Dataverse data, like a customer request portal.", ask: "What is Power Pages used for?" }
+    };
+
+    const result = document.getElementById("result");
+    document.querySelectorAll("#options button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#options button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const p = picks[btn.dataset.key];
+        result.innerHTML =
+          "<h3>" + p.tool + "</h3><p>" + p.why + "</p>" +
+          '<p class="hint">Want more? Ask PowerPal: <a href="#" data-q="' + p.ask + '">"' + p.ask + '"</a></p>';
+        result.querySelector("a").addEventListener("click", e => { e.preventDefault(); askBot(p.ask); });
+      });
+    });
+
+    // Send a question to the Botpress chat when possible, otherwise copy it
+    const toast = document.getElementById("toast");
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function askBot(question) {
+      const bp = window.botpress;
+      if (bp && typeof bp.open === "function") {
+        bp.open();
+        if (typeof bp.sendMessage === "function") {
+          setTimeout(() => {
+            try { bp.sendMessage(question); }
+            catch (e) { copyQuestion(question); }
+          }, 600);
+          return;
+        }
+      }
+      copyQuestion(question);
+    }
+
+    function copyQuestion(question) {
+      try {
+        navigator.clipboard.writeText(question);
+        showToast("Question copied. Paste it into the chat bubble.");
+      } catch (e) {
+        showToast("Open the chat bubble and type: " + question);
+      }
+    }
+
+    document.querySelectorAll("ul.questions button").forEach(btn => {
+      btn.addEventListener("click", () => askBot(btn.dataset.q));
+    });
+  </script>
 </body>
 </html>
