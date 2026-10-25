@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PowerPal | Power Platform Help Bot</title>
+  <style>
+    :root {
+      --ink: #1f1a2e;
+      --muted: #5b5670;
+      --bg: #faf8fc;
+      --card: #ffffff;
+      --accent: #742774;
+      --accent-soft: #f3e8f3;
+      --line: #e6e0ec;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #742774 0%, #3a0f3a 100%);
+      color: #fff;
+      padding: 64px 20px 56px;
+      text-align: center;
+    }
+    header h1 { font-size: 2.6rem; letter-spacing: -0.5px; }
+    header p { max-width: 620px; margin: 12px auto 0; opacity: 0.9; font-size: 1.1rem; }
+    .cta {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 48px 20px 80px; }
+    section { margin-bottom: 48px; }
+    h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--accent); }
+    p.lead { color: var(--muted); margin-bottom: 18px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    ul.questions { list-style: none; display: grid; gap: 10px; }
+    ul.questions li {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 6px;
+    }
+    .note {
+      background: var(--card);
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      color: var(--muted);
+    }
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+    }
+  </style>
+
+  <!-- Botpress Webchat: PowerPal -->
+  <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/10/25/18/20261025182519-5RVA5R0X.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>PowerPal</h1>
+    <p>Your beginner's guide to Microsoft Power Platform. Ask PowerPal anything about Power Apps, Power Automate, Dataverse, Power BI, and where to start learning.</p>
+    <a class="cta" href="#ask">Try the bot</a>
+  </header>
+
+  <main>
+    <section>
+      <h2>Why I built PowerPal</h2>
+      <p class="lead">When people first hear about Power Platform, the names blur together. Is a flow part of Power Apps? What is Dataverse, and do I need it? PowerPal gives short, plain answers to these questions so beginners can figure out which tool fits their problem and how to get started.</p>
+    </section>
+
+    <section>
+      <h2>What PowerPal knows</h2>
+      <p class="lead">PowerPal answers from a knowledge base I wrote that covers the core tools and common beginner questions.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Power Apps</h3>
+          <p>Canvas apps vs. model-driven apps, Power Fx, and when to use each.</p>
+        </div>
+        <div class="card">
+          <h3>Power Automate</h3>
+          <p>Automated, instant, and scheduled cloud flows, plus desktop flows (RPA).</p>
+        </div>
+        <div class="card">
+          <h3>Dataverse</h3>
+          <p>Tables, relationships, business rules, and role-based security.</p>
+        </div>
+        <div class="card">
+          <h3>Power BI &amp; Copilot Studio</h3>
+          <p>Reports and dashboards, and Microsoft's own tool for building AI agents.</p>
+        </div>
+        <div class="card">
+          <h3>Environments &amp; Solutions</h3>
+          <p>How apps move from development to production, managed vs. unmanaged.</p>
+        </div>
+        <div class="card">
+          <h3>Learning Path</h3>
+          <p>Free developer plan, Microsoft Learn, and certifications like PL-900.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ask">
+      <h2>Questions to try</h2>
+      <p class="lead">Click the chat bubble in the bottom-right corner and ask one of these.</p>
+      <ul class="questions">
+        <li>What is the difference between a canvas app and a model-driven app?</li>
+        <li>What types of cloud flows can I build in Power Automate?</li>
+        <li>What is Dataverse and why would I use it?</li>
+        <li>How is Dynamics 365 related to Power Platform?</li>
+        <li>I'm a beginner. Where should I start?</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Good to know</h2>
+      <div class="note">
+        PowerPal is a learning aid built with Botpress for a class project. It sticks to beginner topics and does not cover licensing prices, which change often. For official and up-to-date details, check Microsoft Learn.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Built by Arun Kumar Sakkeri &middot; ISM 6225 Assignment 2 &middot; Powered by Botpress
+  </footer>
+
+</body>
+</html>
