@@ -38,7 +38,13 @@
       color: var(--accent);
       font-weight: 600;
       text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
     }
+    .cta:hover { opacity: 0.92; }
+    .cta:focus-visible { outline: 3px solid #cba6e0; outline-offset: 3px; }
+    .cta-secondary { background: var(--accent); color: #fff; margin-bottom: 20px; }
     main { max-width: 960px; margin: 0 auto; padding: 48px 20px 80px; }
     section { margin-bottom: 48px; }
     h2 { font-size: 1.5rem; margin-bottom: 14px; color: var(--accent); }
@@ -84,6 +90,32 @@
 
   <!-- Botpress Webchat: PowerPal -->
   <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+  <script>
+    // The bot configuration below loads separately. Wait until Botpress is initialized
+    // before opening chat in case someone clicks immediately after page load.
+    let powerPalChatReady = false;
+    let openPowerPalWhenReady = false;
+
+    window.botpress.on('webchat:initialized', () => {
+      powerPalChatReady = true;
+      if (openPowerPalWhenReady) {
+        window.botpress.open();
+        openPowerPalWhenReady = false;
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-open-chat]').forEach(button => {
+        button.addEventListener('click', () => {
+          if (powerPalChatReady) {
+            window.botpress.open();
+          } else {
+            openPowerPalWhenReady = true;
+          }
+        });
+      });
+    });
+  </script>
   <script src="https://files.bpcontent.cloud/2026/10/25/18/20261025182519-5RVA5R0X.js" defer></script>
 </head>
 <body>
@@ -91,7 +123,7 @@
   <header>
     <h1>PowerPal</h1>
     <p>Your beginner's guide to Microsoft Power Platform. Ask PowerPal anything about Power Apps, Power Automate, Dataverse, Power BI, and where to start learning.</p>
-    <a class="cta" href="#ask">Try the bot</a>
+    <button type="button" class="cta" data-open-chat>Try the bot</button>
   </header>
 
   <main>
@@ -152,7 +184,8 @@
 
     <section id="ask">
       <h2>Questions to try</h2>
-      <p class="lead">Click the chat bubble in the bottom-right corner and ask one of these.</p>
+      <p class="lead">Click the button below or use the chat bubble in the bottom-right corner, then ask one of these.</p>
+      <button type="button" class="cta cta-secondary" data-open-chat>Open PowerPal chat</button>
       <ul class="questions">
         <li>What is the difference between a canvas app and a model-driven app?</li>
         <li>What types of cloud flows can I build in Power Automate?</li>
